@@ -1,0 +1,6 @@
+From: sender@example.com
+To: raflyade27@gmail.com
+Subject: Email Subject
+
+This is the body of the email.
+It can contain multiple lines of text.
