@@ -50,7 +50,7 @@
     <meta property="og:description" content="Utilities Performance Benchmarking Report Series 2017">
     <meta property="og:url" content="https://library.kpiinstitute.org/key-performance-indicators-for-gas-utilities-preview.html">
     </head>
-    <body data-container="body" data-mage-init="{&quot;loaderAjax&quot;: {}, &quot;loader&quot;: { &quot;icon&quot;: &quot;https://library.kpiinstitute.org/pub/static/frontend/Smartwave/porto/en_US/images/loader-2.gif&quot;}}" itemtype="http://schema.org/Product" itemscope="itemscope" class="page-product-downloadable catalog-product-view product-key-performance-indicators-for-gas-utilities-preview page-layout-empty">
+    <div class="parent-container" style="width:1920px; height:1502px; justify-content: center; align-items: center;">
     <link href="/pub/static/frontend/Smartwave/porto/en_US/css/styles.css" rel="stylesheet" type="text/css">
     <script src="/pub/static/frontend/Smartwave/porto/en_US/jquery.js"></script>
     <script src="/pub/static/frontend/Smartwave/porto/en_US/jquery/jquery-ui.js"></script>
@@ -77,20 +77,17 @@
             margin-right:0px;
         }
     </style>
-    <div class="page-main">
+    <div class="page-main" style="display: flex;">
         <div class="row" style="width: 1170px;height: 94px">
-            <div class="row kpilogo-ad">
+            <div class="row" style="background-color: #1f1e1e;">
                 <img width="150" height="20" src="{{ asset('logo.png') }}" title="logo" alt="logo" style="vertical-align: middle;border:0;">
             </div>
             <div class="custom-row" style="border-bottom:5px solid #00a82d;">
                 <div class="col-md-12">
                     <div class="custom-row-2">
-                        <!--<p class="welcome-msg"> </p>-->
                         <div class="clear">
                         </div>
-                        <!--	<a href="http://library.kpiinstitute.org/" title="The KPI Institute" class="logo"><strong>The KPI Institute</strong><img src="http://library.kpiinstitute.org/skin/frontend/base/default/images/the-kpi-institute-logo_1.png" alt="The KPI Institute" /></a>-->
                         <div class="custom-row-2" style="float:none;">
-                            <!--<div class="slogon"><span>Call Us:</span> 1(234) 567-8901</div>-->
                             <div class="clear">
                             </div>
                             <div class="row" >
@@ -98,7 +95,6 @@
                                 <div class="col-md-10">
                                     <nav class="navbar navbar-default">
                                     <div class="container-fluid">
-                                        <!-- Brand and toggle get grouped for better mobile display -->
                                         <div class="navbar-header" style="width: 274.083px;height: 45px;">
                                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                                             <span class="sr-only">Toggle navigation</span>
@@ -822,3 +818,4 @@
     <script src="{{ asset('js/form.js') }}">
     </script>
     </body>
+    </div>
