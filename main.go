@@ -5,12 +5,13 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"url-shortener/database"
 	"url-shortener/handlers"
+	"url-shortener/middleware"
 )
 
 func main() {
@@ -35,28 +36,19 @@ func main() {
 	}
 
 	// Initialize router
-	r := gin.Default()
+	r := gin.New()
+
+	// Use custom logger instead of gin.Default()
+	r.Use(middleware.RequestLogger())
+	r.Use(gin.Recovery())
 
 	// Security middleware
-	r.Use(func(c *gin.Context) {
-		// Security headers
-		c.Header("X-Content-Type-Options", "nosniff")
-		c.Header("X-Frame-Options", "DENY")
-		c.Header("X-XSS-Protection", "1; mode=block")
-		c.Header("Referrer-Policy", "strict-origin-when-cross-origin")
-		c.Header("Permissions-Policy", "geolocation=(), microphone=(), camera=()")
-		
-		c.Next()
-	})
+	r.Use(middleware.SecurityHeaders())
+	r.Use(middleware.InputValidation())
+	r.Use(middleware.CORS())
 
-	// CORS middleware
-	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-	}))
+	// Rate limiting middleware (100 requests per minute per IP)
+	r.Use(middleware.RateLimitMiddleware(100, time.Minute))
 
 	// Health check endpoint
 	r.GET("/health", func(c *gin.Context) {
@@ -80,6 +72,9 @@ func main() {
 		api.GET("/analytics/:id", handlers.GetURLAnalytics)
 		api.GET("/analytics", handlers.GetAllAnalytics)
 	}
+
+	// URL validation middleware for short code routes
+	r.Use(middleware.URLValidation())
 
 	// Serve static files for React frontend (before the short URL route)
 	r.Static("/static", "./frontend/dist/static")
